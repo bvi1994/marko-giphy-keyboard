@@ -9,7 +9,8 @@
   },
   "private": true,
   "dependencies": {
-    "marko": "^4.21.8"
+    "marko": "^4.21.8",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@marko/build": "^1.4.0",

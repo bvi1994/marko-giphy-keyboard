@@ -1,30 +1,25 @@
-<app-layout title="Welcome to Marko">
-  <mouse-mask.container>
-    <header>
-      <img.logo src="./logo.svg" alt="Marko"/>
-    </header>
-    <main>
-      <p>Edit <code>./pages/index.marko</code> and save to reload.</p>
-      <a href="https://markojs.com/docs/">
-        Learn Marko
-      </a>
-    </main>
-  </mouse-mask>
-</app-layout>
+import fetch from 'node-fetch'
+import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
 
-style {
-  .container {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size:2em; 
-    color: #fff;
-    background: #111;
-    height:100%;
-    width:100%;
+class {
+  onCreate(){
+    this.state = {
+      searchTerm: '',
+    }
   }
-  img.logo {
-    width:400px;
+  updateSearchTerm(event){
+    this.state = {
+      searchTerm: event.target.value,
+    }
   }
 }
+
+<input
+  type="text"
+  on-input("updateSearchTerm")
+  placeholder="Enter a value"
+  value=state.searchTerm
+/>
+<p>
+  The current search term ${state.searchTerm}
+</p>
