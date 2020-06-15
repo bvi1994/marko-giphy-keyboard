@@ -34,6 +34,9 @@ class {
     </p>
   </if>
   <else>
+    <scroll-button
+      direction='Prev'
+    />
     <div>
       <for|image| of=state.giphyResponse>
         <div>
@@ -48,5 +51,8 @@ class {
         </div>
       </for>
     </div>
+    <scroll-button
+      direction='Next'
+    />
   </else>
 </div>
