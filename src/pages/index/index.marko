@@ -1,2 +1,16 @@
+class {
+  onCreate(){
+    this.state = {
+      searchTerm: '',
+    }
+  }
+  updateSearchTerm(event){
+    this.state = {
+      searchTerm: event.target.value,
+    }
+  }
+}
+
+
 <search-bar />
 <image-gallery />

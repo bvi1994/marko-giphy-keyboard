@@ -1,25 +1,9 @@
-import fetch from 'node-fetch'
-import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
-
-class {
-  onCreate(){
-    this.state = {
-      searchTerm: '',
-    }
-  }
-  updateSearchTerm(event){
-    this.state = {
-      searchTerm: event.target.value,
-    }
-  }
-}
-
 <input
   type="text"
   on-input("updateSearchTerm")
   placeholder="Enter a value"
-  value=state.searchTerm
+  value=input.searchTerm
 />
 <p>
-  The current search term ${state.searchTerm}
+  The current search term ${input.searchTerm}
 </p>
