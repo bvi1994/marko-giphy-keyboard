@@ -39,16 +39,9 @@ class {
     />
     <div>
       <for|image| of=state.giphyResponse>
-        <div>
-          <a
-            href=image.bitly_url
-            key=image.id
-          >
-            <img
-              src=image.images.fixed_width_small.url
-            >
-          </a>
-        </div>
+        <GIF
+          image=image
+        />
       </for>
     </div>
     <scroll-button
