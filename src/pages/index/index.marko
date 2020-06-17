@@ -4,13 +4,18 @@ class {
       searchTerm: '',
     }
   }
-  updateSearchTerm(event){
+  updateSearchTerm(emittedValue){
     this.state = {
-      searchTerm: event.target.value,
+      searchTerm: emittedValue.searchTerm,
     }
   }
 }
 
 
-<search-bar />
+<search-bar
+  on-update-search-term("updateSearchTerm")
+/>
+<p>
+  The current search term ${state.searchTerm}
+</p>
 <image-gallery />

@@ -1,9 +1,12 @@
+class {
+  updateSearch(event){
+    this.emit('update-search-term', {searchTerm: event.target.value})
+  }
+}
+
 <input
   type="text"
-  on-input("updateSearchTerm")
+  on-input("updateSearch")
   placeholder="Enter a value"
   value=input.searchTerm
 />
-<p>
-  The current search term ${input.searchTerm}
-</p>
