@@ -1,14 +1,35 @@
+import fetch from 'node-fetch'
+import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
+
 class {
   onCreate(){
     this.state = {
       searchTerm: '',
+      APIKey: GIPHYAPIKEY,
+      giphyResponse: null,
+      numberOfGifsToShow: 7,
+      gifsToIndex: 5,
+      currentIndex: 0,
     }
   }
   updateSearchTerm(emittedValue){
-    this.state = {
-      searchTerm: emittedValue.searchTerm,
-    }
+    this.state.searchTerm = emittedValue.searchTerm;
+    this.getGifs();
   }
+  getGifs(){
+    let APIAddress = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&rating=g&api_key=${this.state.APIKey}&limit=${this.state.numberOfGifsToShow}&offset=${this.state.currentIndex}`;
+    console.log(APIAddress)
+    fetch(APIAddress)
+      .then(
+        response => response.json()
+      )
+      .then(
+        data => this.state.giphyResponse = data.data
+      )
+      .catch(
+        error => console.log('Error from getGifs() signature: ', error)
+      );
+    }
 }
 
 
@@ -18,4 +39,7 @@ class {
 <p>
   The current search term ${state.searchTerm}
 </p>
-<image-gallery />
+<image-gallery
+  searchTerm=state.searchTerm
+  giphyResponse=state.giphyResponse
+/>

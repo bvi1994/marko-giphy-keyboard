@@ -1,44 +1,20 @@
-import fetch from 'node-fetch'
-import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
-
-class {
-  onCreate(){
-    this.state = {
-      APIKey: GIPHYAPIKEY,
-      giphyResponse: null,
-      numberOfGifsToShow: 7,
-      gifsToIndex: 5,
-      currentIndex: 0,
-    }
-    this.getGifs();
-  }
-  getGifs(){
-    let APIAddress = `http://api.giphy.com/v1/gifs/search?q=Pikachu&rating=g&api_key=${this.state.APIKey}&limit=${this.state.numberOfGifsToShow}&offset=${this.state.currentIndex}`;
-    fetch(APIAddress)
-      .then(
-        response => response.json()
-      )
-      .then(
-        data => this.state.giphyResponse = data.data
-      )
-      .catch(
-        error => console.log('Error from getGifs() signature: ', error)
-      );
-    }
-}
-
 <div>
-  <if(!state.giphyResponse)>
+  <if(!input.searchTerm)>
     <p>
-      No response from GIPHY
+      Use the above search box to search GIPHY live!
     </p>
   </if>
+  <else-if(!input.giphyResponse || input.giphyResponse.length === 0)>
+    <p>
+      No response from GIPHY for ${input.searchTerm}
+    </p>
+  </else-if>
   <else>
     <scroll-button
       direction='Prev'
     />
     <div>
-      <for|image| of=state.giphyResponse>
+      <for|image| of=input.giphyResponse>
         <GIF
           image=image
         />
