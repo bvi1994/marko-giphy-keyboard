@@ -1,3 +1,21 @@
+class {
+  displayMoreGifs(direction){
+    if(direction.direction === 'left'){
+      if(this.input.currentIndex === 0){
+        return;
+      }
+      this.emit("refreshIndex", {
+        currentIndex: this.input.currentIndex - this.input.numberOfGifsToShow
+      });
+    }
+    if(direction.direction === 'right') {
+      this.emit("refreshIndex", {
+        currentIndex: this.input.currentIndex + this.input.numberOfGifsToShow
+      });
+    }
+  }
+}
+
 <div>
   <if(!input.searchTerm)>
     <p>
@@ -12,6 +30,7 @@
   <else>
     <scroll-button
       direction='Prev'
+      on-paginate("displayMoreGifs")
     />
     <div>
       <for|image| of=input.giphyResponse>
@@ -22,6 +41,7 @@
     </div>
     <scroll-button
       direction='Next'
+      on-paginate("displayMoreGifs")
     />
   </else>
 </div>

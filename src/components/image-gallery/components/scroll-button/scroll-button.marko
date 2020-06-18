@@ -1,4 +1,17 @@
-<button>
+class {
+  displayMoreGifs(direction){
+    if(direction === 'Prev'){
+      this.emit("paginate", {direction: "left"})
+    }
+    if(direction === 'Next') {
+      this.emit("paginate", {direction: "right"})
+    }
+  }
+}
+
+<button
+  on-click("displayMoreGifs", input.direction)
+>
   <if(input.direction === 'Prev')>
     <
   </if>
