@@ -1,14 +1,14 @@
-# Thanks for checking out Marko
+# Welcome to a new Tutorial for Marko and Example 
 
-## Overview
+Thanks for checking out this repo. This repo contains the completed source code for the GIPHY Live Search in Marko as well as the Marko down for the tutorial that teaches someone how to make the GIPHY Live Search App. 
 
-This project is powered by `@marko/serve` and `@marko/build`.  
+[The Markdown for the new Tutorial](https://github.com/bvi1994/marko-keyboard-example/blob/master/tutorial.md). 
 
-- Run `npm run dev` to start the development server
-- Run `npm run build` to build a production-ready node.js server
-- Run `npm start` to run the production server
+If you're going to run the application directly, first, make sure you get a GIPHY API Key. You can find it 
+[here](https://developers.giphy.com/docs/api/#quick-start-guide). Then create a .constants file that we will use to access the API key that we got from .giphy. In marko-giphy-keyboard, create a script called APIKEY.constants.js. Then in that file, save the following line:
 
-## Adding Pages
+```export const GIPHYAPIKEY = `Insert your GIPHY API Key in between the backtacks`;```
 
-Pages map to the directory structure. You can add additional pages by creating files/directories under `src/pages` with `.marko` files.  Learn more in the [`@marko/serve` docs](https://github.com/marko-js/cli/blob/master/packages/serve/README.md).
+That's it! 
 
+If you have any suggestions on how to improve the tutorial, feel free to open a PR or send contact me at brvi [at] ebay [dot] com. This is currently a WIP that will be featured on the Marko website! :) 
