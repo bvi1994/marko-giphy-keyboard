@@ -9,8 +9,26 @@ class {
   }
 }
 
+style {
+  .scroll-button {
+    border-radius: 50%;
+    height: 27px;
+    width: 27px;
+    margin-top: 30px;
+    background-color: #f1f1f1;
+    border-width: 3px;
+  }
+  .scroll-button:hover {
+    border-style: solid;
+    border-color: #00B4CC;
+    border-width: 3px;
+    cursor: pointer;
+  }
+}
+
 <button
   on-click("displayMoreGifs", input.direction)
+  class="scroll-button"
 >
   <if(input.direction === 'Prev')>
     <

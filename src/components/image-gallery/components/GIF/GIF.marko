@@ -1,10 +1,25 @@
-<div>
+style {
+  .image-gallery__gifGallery__gif {
+    margin-left: 3px;
+    margin-right: 3px;
+    cursor: pointer;
+  }
+  .image-gallery__gifGallery__gif__link:hover {
+    border-style: solid;
+    border-color: #00B4CC;
+    border-width: 3px;
+    margin: -3px;
+  }
+}
+
+<div class="image-gallery__gifGallery__gif">
   <a
     href=input.image.bitly_url
     key=input.image.id
   >
     <img
       src=input.image.images.fixed_width_small.url
+      class="image-gallery__gifGallery__gif__link"
     >
   </a>
 </div>

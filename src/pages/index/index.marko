@@ -36,14 +36,30 @@ class {
     }
 }
 
+style {
+  body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+  }
+  .gif-keyboard {
+    position: relative;
+    top: 40%;
+    left: 40%;
+    width: 500px;
+  }
+}
 
-<search-bar
-  on-update-search-term("updateSearchTerm")
-/>
-<image-gallery
-  searchTerm=state.searchTerm
-  giphyResponse=state.giphyResponse
-  currentIndex=state.currentIndex
-  numberOfGifsToShow=state.numberOfGifsToShow
-  on-refreshIndex("updateIndex")
-/>
+
+<div class="gif-keyboard">
+  <search-bar
+    on-update-search-term("updateSearchTerm")
+  />
+  <image-gallery
+    searchTerm=state.searchTerm
+    giphyResponse=state.giphyResponse
+    currentIndex=state.currentIndex
+    numberOfGifsToShow=state.numberOfGifsToShow
+    on-refreshIndex("updateIndex")
+  />
+</div>
