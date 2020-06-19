@@ -1,0 +1,64 @@
+class {
+  displayMoreGifs(direction){
+    if(direction.direction === 'left'){
+      if(this.input.currentIndex === 0){
+        return;
+      }
+      this.emit("refreshIndex", {
+        currentIndex: this.input.currentIndex - this.input.numberOfGifsToShow
+      });
+    }
+    if(direction.direction === 'right') {
+      this.emit("refreshIndex", {
+        currentIndex: this.input.currentIndex + this.input.numberOfGifsToShow
+      });
+    }
+  }
+}
+
+style {
+  .image-gallery {
+    position: relative;
+  }
+  .image-gallery--error {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+  }
+  .image-gallery__gifGallery {
+    margin-top: 5%;
+    display: flex;
+    position: relative;
+    left: -35%;
+  }
+}
+
+<div class="image-gallery">
+  <if(!input.searchTerm)>
+    <p class="image-gallery--error">
+      Use the search box to search GIPHY!
+    </p>
+  </if>
+  <else-if(!input.giphyResponse || input.giphyResponse.length === 0)>
+    <p class="image-gallery--error">
+      No response from GIPHY for ${input.searchTerm}
+    </p>
+  </else-if>
+  <else>
+    <div class="image-gallery__gifGallery">
+      <scroll-button
+        direction='Prev'
+        on-paginate("displayMoreGifs")
+      />
+      <for|image| of=input.giphyResponse>
+        <GIF
+          image=image
+        />
+      </for>
+      <scroll-button
+        direction='Next'
+        on-paginate("displayMoreGifs")
+      />
+  </div>
+  </else>
+</div>

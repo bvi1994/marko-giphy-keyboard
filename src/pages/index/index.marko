@@ -4,22 +4,62 @@ import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
 class {
   onCreate(){
     this.state = {
-      searchTerm: '',
+      searchTerm: null,
+      APIKey: GIPHYAPIKEY,
+      giphyResponse: null,
+      numberOfGifsToShow: 7,
+      gifsToIndex: 5,
+      currentIndex: 0,
     }
   }
-  updateSearchTerm(event){
-    this.state = {
-      searchTerm: event.target.value,
+  updateSearchTerm(emittedValue){
+    this.state.searchTerm = emittedValue.searchTerm;
+    this.updateIndex();
+  }
+  updateIndex(newIndex={currentIndex: 0}){
+    this.state.currentIndex = newIndex.currentIndex;
+    this.getGifs();
+  }
+  getGifs(){
+    let APIAddress = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&rating=g&api_key=${this.state.APIKey}&limit=${this.state.numberOfGifsToShow}&offset=${this.state.currentIndex}`;
+    console.log(APIAddress)
+    fetch(APIAddress)
+      .then(
+        response => response.json()
+      )
+      .then(
+        data => this.state.giphyResponse = data.data
+      )
+      .catch(
+        error => console.log('Error from getGifs() signature: ', error)
+      );
     }
+}
+
+style {
+  body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+  }
+  .gif-keyboard {
+    position: relative;
+    top: 40%;
+    left: 40%;
+    width: 500px;
   }
 }
 
-<input
-  type="text"
-  on-input("updateSearchTerm")
-  placeholder="Enter a value"
-  value=state.searchTerm
-/>
-<p>
-  The current search term ${state.searchTerm}
-</p>
+
+<div class="gif-keyboard">
+  <search-bar
+    on-update-search-term("updateSearchTerm")
+  />
+  <image-gallery
+    searchTerm=state.searchTerm
+    giphyResponse=state.giphyResponse
+    currentIndex=state.currentIndex
+    numberOfGifsToShow=state.numberOfGifsToShow
+    on-refreshIndex("updateIndex")
+  />
+</div>
