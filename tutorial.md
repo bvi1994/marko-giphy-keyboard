@@ -3,29 +3,33 @@
 
 This tutorial doesn't assume any existing Marko knowledge.
 
-## Before We Start the Tutorial {#before-we-start-the-tutorial}
-
-We will build a GIF Keyboard using the [GIPHY API](https://developers.giphy.com/docs/api#quick-start-guide) during this tutorial. While this tutorial will go over most features of Marko, the code may not follow the best coding practices for Marko projects. Nevertheless, the features and techniques in the tutorial are used to building any Marko Application and mastering them will give you a deep understanding of how Marko works.
-
-> Tip:
->
->This tutorial is design for people who **learn by doing** or **learn by example.** To get overview of Marko and its syntax, you can check out the [reference](https://markojs.com/docs/reference-overview/) section and play around with some of the [examples](https://markojs.com/try-online/?file=%2Fmarko-color-picker%2Findex.marko&gist=) that we have.
-
-
-The tutorial is divided into several sections:
-
-* [Setup for the Tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-* [Overview](#overview) will teach you **the fundamentals** of Marko how Marko works.
-
 ### What Are We Building? {#what-are-we-building}
 
-In this tutorial, we'll show how to build a GIF Keyboard with Marko using the GIPHY API.
+In this tutorial, we'll show how to build a GIF Keyboard with Marko using the [GIPHY API](https://developers.giphy.com/docs/api#quick-start-guide).
 
 You can see what we'll be building here: **[Final Result]()**. Don't worry if this doesn't make sense! The goal of this tutorial is to help you understand Marko and its syntax.
+
+While this tutorial will go over most features of Marko, the code may not follow the best coding practices for Marko. The purpose of this tutorial are to give an overview of the features used in building Marko Applications and give you a deep understanding of Marko.
 
 ### Prerequisites {#prerequisites}
 
 We will assume you have basic knowledge of HTML, CSS and JavaScript.
+
+> Tip:
+>
+>This tutorial is design for people who **learn by doing** or **learn by example.** To get overview of Marko and its syntax, you can check out the [reference](https://markojs.com/docs/reference-overview/) section and play around with some of the [examples](https://markojs.com/try-online/) that we have. This tutorial supplements the references and examples.
+
+
+The tutorial is divided into several sections:
+
+* [Setup for the Tutorial](#setup-for-the-tutorial) will give you a starting point to follow the tutorial.
+* [Where to get help](#where-to-get-help) will show you where to get help
+* [Overview](#overview) will give you an overview of what Marko is
+* [Part 0](#part-zero) will go through the set up for this tutorial
+* [Part 1](#part-one) introduces the `state` and events
+* [Part 2](#part-two) introduces custom, conditional tags and `input`
+* [Part 3](#part-three) introduces `emit` and custom events
+* [Part 4](#part-four) introduces styling with Marko
 
 ## Setup for the Tutorial {#setup-for-the-tutorial}
 
@@ -36,12 +40,12 @@ We recommend that you set up your Marko Project locally. Here are the steps to f
 
 ```bash
 npx @marko/create
-***Type your project name*** > marko-giphy-keyboard
+***Type your project name*** > marko-giphy-keyboard # That will be the name of this project
 ```
 
 ```bash
 Choose a template …  Use ↑ and ↓. Return ⏎ to submit.
-❯ Default starter app // Select this option
+❯ Default starter app  # Select this option
   Example from marko-js/examples
 ```
 
@@ -55,13 +59,9 @@ npm run dev
 
 Open `http://localhost:3000` in the browser, you see this following:
 
-[Insert the marko start image here]
+![Marko start image here](tutorial-images/welcome-to-marko.png)
 
-We recommend following [using a Marko Syntax Highlighting Editor plugin](https://markojs.com/docs/editor-plugins/) for your editor.
-
-### Help, I'm Stuck! {#help-im-stuck}
-
-If you get stuck, check out our [StackOverFlow page](https://stackoverflow.com/questions/tagged/marko). You can also check out our [Marko Glitter Chat](https://gitter.im/marko-js/marko) and post your questions.
+We recommend [using a Marko Syntax Highlighting Editor plugin](https://markojs.com/docs/editor-plugins/) for your editor.
 
 ### Getting the GIPHY API Key
 
@@ -77,6 +77,10 @@ You will need to get an API Key from [GIPHY](https://giphy.com/) to fetch data f
 
 4. Get your API key! It should be a randomly generated string. Be sure to save that string somewhere safe as you will need it later.
 </details>
+
+### Help, I'm Stuck! {#where-to-get-help}
+
+If you get stuck, check out our [StackOverFlow page](https://stackoverflow.com/questions/tagged/marko). You can also check out our [Marko Glitter Chat](https://gitter.im/marko-js/marko) and post your questions.
 
 ## Overview of Marko {#overview}
 
@@ -119,24 +123,11 @@ $ var count = state.count;
 
 style {
   .click-count button {
-      background: #4285f4;
-      color: #ffffff;
-      border: 1px solid #1266f1;
-      display: inline-block;
-      padding: 12px 32px;
-      height: 26px;
-      line-height: 26px;
-      cursor: pointer;
+      /* Some CSS lines*/
   }
 
   .click-count .count {
-      background: #fff;
-      border: 1px solid #1266f1;
-      display: inline-block;
-      height: 26px;
-      line-height: 26px;
-      vertical-align: middle;
-      padding-right: 13px;
+      /* Some more CSS lines */
   }
 
   .click-count .count.positive {
@@ -154,7 +145,7 @@ style {
 
 Don't worry if you don't understand even most of the code. We will explain the specific features of Marko in greater detail. What this code snippet shows is that we can write components using HTML, CSS and JavaScript.
 
-A component in Marko is basically a building block for a user interface. What Marko allows is the building parts of a UI which we can then use to build an entire interface.
+***A component in Marko is basically a building block for a user interface. What Marko allows is the building parts of a UI which we can then use to build an entire interface.***
 
 In this example, the `Counter` component compromises of three other components, the `click-count` callbacks div, and the two `button` that are built in with their corresponding `on-click` functions and styles. We can then call this component in another file by referring it as `<Counter />`
 
@@ -162,21 +153,9 @@ Notice that in the example, we have a `this.state` in this component.  This is k
 
 #### How does Marko Work?
 
-Lets look at a simpler example. Again, don't freak out if you don't understand the syntax for Marko just yet.
+ets look at a simpler example. Again, don't freak out if you don't understand the syntax for Marko just yet.
 
-Suppose we have a component called `<list-of-numbners />` that looks something like this:
-
-```html
-<div.list-of-numbers>
-  <for|count| from=1 to=5 step=1>
-    <li key=count>
-      ${count}: {count}
-    </li>
-  </for>
-</div>
-```
-
-If we then call `<list-of-numbers />` from another component, the output HTML would be
+Suppose we have a component called `<list-of-numbers />` that lists the numbers between 1 to 5:
 
 ```html
 <div.list-of-numbers>
@@ -198,7 +177,7 @@ If we then call `<list-of-numbers />` from another component, the output HTML wo
 </div>
 ```
 
-That's right, Marko components output HTML. Alright, it's an oversimplication. What actually happens is that Marko renders the `<list-of-numbers />` directly to the VDOM which then quickly renders the view on the browswer.
+ What happens is that Marko renders the `<list-of-numbers />` **directly by outputting the HTML directly.** Actually, Marko renders to the VDOM which then quickly renders the view on the browswer.
 
 What is a VDOM? At a high level, a VDOM is just a representation of the actual DOM (the actual model that is render on the browswer) that is more efficient to update than DOM maniuplation. The implementation details on how Marko does it can be found [here](https://markojs.com/docs/why-is-marko-fast/).
 
@@ -212,42 +191,42 @@ The `<list-of-numbers />` component only renders the build-in DOM components as 
 </div>
 ```
 
-The above component (`<three-list-of-numbers />`) will render the `<list-of-numbers />` three time every time we call `<three-list-of-numbers />`. Although the example is a bit contrieved, the example shows that we can encapsulate components inside other components. This allows us to build more complex UIs from simplier components.
+The above component (`<three-list-of-numbers />`) will render the `<list-of-numbers />` three time every time we call `<three-list-of-numbers />`. Although the example is a bit contrieved, the example shows that **we can encapsulate components inside other components. This allows us to build more complex UIs from simplier components.**
 
-## Before Coding
-
-### Identifying the main components and subcomponents
+## Before Coding {#part-zero}
 
 Before we start to write code for out GIF Keyboard, it is worth spending some time planning ahead as to what the application would look like and what are the major components of our application.
+
+### Identifying the main components and subcomponents
 
 Here's a rough mock of what our GIF Keyboard would look like:
 
 ![The Worst MockUp for a GIF Keyboard by MS Paint](tutorial-images/mockup1.png)
 
-The first thing to do is figure out what the main components are for the application. Once we identify the main components, we identify the sub-components of those main components. We can keep doing this, in this application however, it identifying the main components and the corresponding subcomponents should be enough.
+The first thing to do is figure out what the main components are for the application. Once we identify the main components, we identify the sub-components of those main components. Identifying the main components and the corresponding subcomponents one level deep should be enough for this project.
 
 The image below displays the mock and the main components.
 
 ![The Worst MockUp for a GIF Keyboard by MS Paint with Main Components](tutorial-images/mockup2.png)
 
-In this image, we have two main components for our GIF keyboard. We will let the red main component to be `<SearchBox />` and the blue main component to be `<ImageGallery />`.
+In this image, we have two main components for our GIF keyboard. We will let the red main component to be `<search-bar />` and the blue main component to be `<image-gallery />`.
 
-The `<SearchBox />` Component will be take in user input and then passes the term to GIPHY and loads the result on the `<ImageGallery />` component. We will talk more about the `<SearchBox />` component later. The `<ImageGallery />` component will display all the relevant gifs from the user input in `<SearchBox />` and two buttons, left and right, that will allow them to scroll through gifs.
+The `<search-bar />` Component will be take in user input and then passes the term to GIPHY and loads the result on the `<image-gallery />` component. We will talk more about the `<search-bar />` component later. The `<image-gallery />` component will display all the relevant gifs from the user input in `<search-bar />` and two buttons, left and right, that will allow them to scroll through gifs.
 
-Since we are allowed to encapsulate Marko components with other components, we can break the `<ImageGallery />` into subcomponents. The subcomponents for `<ImageGallery />` are boxed below in green and orange.
+Since we are allowed to encapsulate Marko components with other components, we can break the `<image-gallery />` into subcomponents. The subcomponents for `<image-gallery />` are boxed below in green and orange.
 
 ![The Worst MockUp for a GIF Keyboard by MS Paint with subcomponents](tutorial-images/mockup3.png)
 
-We will name the orange subcomponent as `<Images />` subcomponent and the green subcomponents as `<ScrollButtons />`. Notice that while we identified three subcomponents, we only need to write two new subcomponents. We will go into further details once we start writing code for these components and subcomponents.
+We will name the orange subcomponent as `<GIF />` subcomponent and the green subcomponents as `<scroll-button />`. Notice that while we identified three subcomponents, we only need to write two new subcomponents. We will go into further details once we start writing code for these components and subcomponents.
 
 Here is the component hierarchy we have identified:
 
 ```
 giphy-keyboard
-  - SearchBox
-  - ImageGallery
-    - Images
-    - ScrollButton
+  - search-bar
+  - image-gallery
+    - GIFS
+    - scroll-buttons
 ```
 
 And here's the component hierarchy in picture:
@@ -262,22 +241,21 @@ We need to install [node-fetch](https://github.com/node-fetch/node-fetch), which
 
 ```npm install --save node-fetch```
 
-Next, we should create a `.constants` file that we will use to access the API key that we got from .giphy. In `marko-giphy-keyboard`, create a script called `APIKEY.constants.js`. Then in that file, save the following line:
+Next, we should create a `.constants` file that we will use to access the API key that we got from .giphy. In `marko-giphy-keyboard`, create a script called `APIKEY.constants.js`. In that file, save the following line:
 
 ```js
-export const GIPHYAPIKEY = `Insert your GIPHY API Key in between the backtacks`;
+export const GIPHYAPIKEY = `Insert your GIPHY API Key in between the backticks`;
 ```
 
 You should have already [recieved your API Key from GIPHY](https://developers.giphy.com/docs/api#quick-start-guide). If not, follow the directions to revieve your API key and then insert that key in the above line.
 
-Next go to the `.gitignore` file and add the following two lines at the bottom:
+Next go to the `.gitignore` file and add the line at the bottom:
 
 ```
-package-lock.json
 *.constants.js
 ```
 
-This is to prevent your git repo from getting too big as well as preventing your GIPHY API Key from being public. This may not be the best practice in a normal environment. For purpose of this tutorial, the hiding of the `package-lock` and the API key are suffice.
+This is to prevent your git repo from getting too big as well as preventing your GIPHY API Key from being public. This may not be the best practice in a normal environment but hiding the API key like we did is suffice.
 
 In `/src/pages/index/index.marko`, remove all the generated code and then add the following lines at the top:
 
@@ -296,13 +274,13 @@ class {
 </p>
 ```
 
-Run the program (`npm run dev`), then run go into the browswer console and make sure you're able to see your GIPHY API key in the console by clicking on `Hello Marko`. If you're able to see the API key after clicking on the element, you are good to go! You may also remove the `logo.svg` in the `index` folder.
+Run the program (`npm run dev`), then go into the browser console and make sure you're able to see your GIPHY API key in the console by clicking on `Hello Marko`. If you're able to see the API key after clicking on the `<p>` element, you are good to go! You may remove the `logo.svg` in the `index` folder.
 
-We installed our require dependacy, prevented our API key from accidentally being made public and made our API key useable.
+We installed our required dependacy, prevented our API key from accidentally being made public and made our API key usable.
 
-## Writing Code with Marko
+## Part One: The `state` in Marko and Events {#part-one}
 
-As stated before, the purpose of this tutorial is to not necessarily write the most elegant or follow all the best practices of Marko. The purpose of this tutorial is to get an overview of Marko main features and how we can use them. This tutorial will first set up the appropriate HTML and JavaScript logic for each component. Then once each component is integrated with each other, we will focus on the styling (CSS).
+This tutorial will first set up the appropriate HTML and JavaScript logic for each component. Once each component is integrated with each other, we will focus on the styling (CSS).
 
 ### Searchbox in GIPHY and `state` in Marko
 
@@ -379,17 +357,19 @@ Alright, that was a lot of new code that we added that you may not be familar wi
 
 ### The `onCreate` method
 
-The `onCreate` signature that we have added initalizes the `state` for the component when the component gets created. We can also use the `onCreate` method to specify what should be done when the component gets created. Usually, the `onCreate` method is used to set the initial values for stateful components.
+The `onCreate` signature that we have added initalizes the `state` for the component (and initial values) when the component gets created. We can also use the `onCreate` method to specify what should be done when the component gets created.
 
 [Read more about the `onCreate` method](https://markojs.com/docs/class-components/#oncreateinput-out)
 
 ### The `state` object
 
-The `this.state` is one of the most important Marko features. `this.state` refers to the state of the component, which is referred to as the *state* object. As mentioned previously, the *state* of the component are properties of a component.
+The `this.state` is one of the most important Marko features. `this.state` refers to the state of the component, which is referred to as the *state* object. As mentioned previously, **the *state* of the component are properties of a component.**
 
 When the state object changes, the component will be updated. This would include the children, or the components that are encapulsulated, to be re-rendered. Therefore, the *state object should only contain data that triggers rerenders*.
 
 Only properties that exists when `this.state` is first defined (usually in the `onCreate`) are watched and defined. Therefore, if you don't need to use that state when the component is created, set it to `null`.
+
+**In the HTML portion of Marko, `this` is not required to access the component state.** In other words, for HTML, you can access the component of the state using `state.[propertyName]`.
 
 #### Updating the `state` object
 
@@ -407,7 +387,7 @@ In the context of our GIPHY Keyboard, we are using `updateSearchTerm` to update 
 
 In the HTML portion of our component, we can access the `state` value by using the form `state.propertyName`. In this project, we can keep track and render the `searchTerm` state in the HTML with `state.searchTerm`.
 
-## Browser Events in Marko
+### Browser Events in Marko
 
 In the example code, we added an event handler to the `<input>` tag. To attach an event handler in HTML, we normally do the following:
 
@@ -422,7 +402,7 @@ In Marko, we add an event handle like this:
 <input on-input("functionSignature") />
 ```
 
-We essentally add a `-` between `on` and the name and then pass in the callback signature as a string. We could also pass in a callback directly into the event handle like so:
+We essentally add a `-` between `on` and the name and then pass in the callback signature in the class as a string. We could also pass in a callback directly into the event handle like so:
 
 
 ```html
@@ -431,25 +411,25 @@ We essentally add a `-` between `on` and the name and then pass in the callback 
 
 In this case, we don't need to turn the function as a string.
 
-For the purposes for building our GIF Keyboard, we added the `updateSearchTerm` to our event handler for our `<input />`. This means that every time a user inputs something in the searchox, the `searchTerm` states gets updated and the component gets re-rendered.
+For the purposes for building our GIF Keyboard, we added `updateSearchTerm` to our event handler for our `<input />`. This means that every time a user inputs something in the searchox, the `searchTerm` states gets updated and the component gets re-rendered.
 
 We will be building our own event handler later in this tutorial.
 
 [This is what your code should look like currently](https://github.com/bvi1994/marko-keyboard-example/blob/part-one/src/pages/index/index.marko).
 
-## What we have learned so far
+### What we have learned so far
 
-Lets take a step back what we learned so far just by building the searchbar component.
+Let's take a step back what we learned so far just by building the searchbar component.
 
  - `onCreate` method and what it does
- - Initializing `state` of a component, how to modify the value of the state and how to access the state in HTML
- - Attaching call back to event handlers
+ - Initializing `state` of a component, how to modify the value of the `state` and how to access the `state` in HTML
+ - Attaching call back to native event handlers
 
-## Encapulation of a component (custom tags)
+## Encapulation of a component (custom tags) {#part-two}
 
-Lets encapsulate the component that we have written into one component now. First, remove both components in `src/components` (`app-layout.marko` and `mouse-mask.marko` components) that were generated by the `marko-create` helper.
+Let's encapsulate the component that we have written into one component now. First, remove both components in `src/components` (`app-layout.marko` and `mouse-mask.marko` components) that were generated by the `marko-create` helper.
 
-In the `src/components` folder, create a folder called `search-bar`. Afterwards, create a file called `search-bar.marko`. Then cut the entire source code in `src/pages/index/index.marko` and paste it into the new `search-bar.marko` file that you just created.
+In the `src/components` folder, create a folder called `search-bar`. Afterwards, create a file called `search-bar.marko` in that folder. Then cut the entire source code in `src/pages/index/index.marko` and paste it into the new `search-bar.marko` file that you just created.
 
 In `index.marko`, put in the following lines:
 
@@ -467,15 +447,15 @@ Marko looks for a `/components/` folder which then looks the name of the custom 
 
 ## Creating the GIF Gallery
 
-Lets review on what the `ImageGallery` component hierarchy looks like:
+Lets review on what the `image-gallery` component hierarchy looks like:
 
 ```
-- ImageGallery
-  - Images
-  - ScrollButton
+- image-gallery
+  - GIFs
+  - scroll-button
 ```
 
-Looking at the mock up from earlier, `<Images>` would just be a bunch of images and we would have two `<ScrollButton`>s, one going left and one going right that will allow users to scroll through the results. We will be building those subcomponents inside `<image-gallery>`.
+Looking at the mock up from earlier, `<Images>` would just be a bunch of images and we would have two `<scroll-button`> components, one going left and one going right that will allow users to scroll through the results. We will be building those subcomponents inside `<image-gallery>`.
 
 Create a folder called `image-gallery` inside the `components` folder. Then inside the `image-gallery` folder, create another `components` folder and a file called `image-gallery.marko`. Keep the inner `components` folder empty for now.
 
@@ -489,7 +469,7 @@ Here is the end point we will be using:
 http://api.giphy.com/v1/gifs/search?q=[search keyword]&rating=g&api_key=[API Key]&limit=[Display limit at a tie]&offset=[result index]
 ```
 
-You can view the search request parameters as well as play around with the API explorer in the above link.
+You can view the search request parameters as well as play around with the API explorer in the GIPHY documentation.
 
 ### Building the `image-gallery` Component
 
@@ -561,11 +541,11 @@ The result should be the following:
 
 ![You should see a GIF Gallery with Pikachus](tutorial-images/image-gallery-1.png)
 
-Note: Pikachu images may vary. [Here's what your code should look like at this point](https://github.com/bvi1994/marko-keyboard-example/commit/5c60a67b1a101a33bc6745267feb9e24178a6c45).
+Note: Pikachu GIFs may vary. [Here's what your code should look like at this point](https://github.com/bvi1994/marko-keyboard-example/tree/5c60a67b1a101a33bc6745267feb9e24178a6c45).
 
 Okay, we just added bunch of new code, some of which you have never seen. Lets go over code we have just added.
 
-The two import statement are just what they are. We will be removing them at a later time. We have already explained what `onCreate` and `state` are. In this case, we are just initalizing the state properties to the following values. `this.getGifs()` called `getGifs()` when the component loads.
+The two import statement are just what they are; they will be moved later. We have already explained what `onCreate` and `state` are. In this case, we are just initalizing the state properties to the following values. `this.getGifs()` called `getGifs()` when the component loads.
 
 `getGifs()` basically makes a request to the given address and parameters using `node-fetch`. When the [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) returns successful, it then changes the `giphyResponse` property of the state. If not, an error is loggeed.
 
@@ -573,7 +553,7 @@ The two import statement are just what they are. We will be removing them at a l
 
 In the HTML portion of the component, we have `<if>` and `<else>` tags. Those tags behave very similarly to if-else statements in JavaScript.
 
-The `<if>` tag takes in an argument to see if anything should be rendered in between `<if>` and `</if>`. If there's an `<else>` tag, if the `<if>` tag failed, everything inside the `<else>` tag gets rendered.
+The `<if>` tag takes in an argument to see if anything should be rendered in between `<if>` and `</if>`. If there's an `<else>` tag, everything inside the `<else>` tag gets rendered if the `<if>` tag fails.
 
 `<else-if>` behaves exactly like it would with JavaScript.
 
@@ -581,7 +561,7 @@ The `<if>` tag takes in an argument to see if anything should be rendered in bet
 
 ### The `for` tag
 
-We also have a `for` tag in the HTML portion of the component. The `for` tag is very similar to a for-loop in JavsScript. There are a few varients of the `for` tag in Marko, which is explained in the documentation below.
+We also have a `for` tag in the HTML portion of the component. The `for` tag is very similar to a for-loop in JavsScript. There are a few varients of the `for` tag in Marko, which are explained in the documentation below.
 
 [Read more about the `for` tag](https://markojs.com/docs/conditionals-and-lists/#lists)
 
@@ -629,13 +609,13 @@ Now back in the the `image-gallery` component, add the following lines in the fo
 
 [What the code should look like so far](https://github.com/bvi1994/marko-keyboard-example/commit/e23dca206b065a09a967895c62fd1bf0e11728f9)
 
-We will add the functionally of the buttons in a little bit, right now we just want to make sure that we can render the buttons.
+We will add the functionally of the buttons later, we just want to make sure that buttons render.
 
-In the `scroll-button` component, we have added an object called `input`. `input` in Marko is an object where the data is used for the component. The `input` object is similar to paramters in JavaScript functions. You can access the parameter function by using `input.[parameter-name]` within the component.
+In the `scroll-button` component, we have added an object called `input`. `input` is an object provided by Marko that contains all the attibutes when it is used. You can think attribute as neing analagous to JavaScript parameters
 
-To pass in a value by parameter to a component, simply add the following to the tag `parameter-name=value`.
+***To pass in a value by attribute to a component, simply add the following to the tag `attribute-name=value`.***
 
-In the example, we used passing in a `direction` as a parameter name for the `scroll-button` component. Within the `sctoll-button` component, we would accessthe value by using `input.direction`.
+In the example, we used pass in `direction` as an attribute for the `scroll-button` component. Within the `sctoll-button` component, we would access the value by using `input.direction`.
 
 [Read more about the `input` in Marko](https://markojs.com/docs/rendering/)
 
@@ -643,7 +623,7 @@ In the example, we used passing in a `direction` as a parameter name for the `sc
 
 Now that we know about `input` in Marko, as an excerise, lets refactor our code using the `input` keyword.
 
-Lets encapsulate the GIFs themselves by putting them in a `GIF` component. As an excerise,figure out how to create a GIF component. Once created, add the following lines to the `GIF` component.
+Lets encapsulate the GIFs themselves by putting them in a `GIF` component. As an excerise, figure out how to create a GIF component in the components folder. Once created, add the following lines to the `GIF` component.
 
 ```html
 <div>
@@ -675,13 +655,13 @@ That was a lot to take in for one component. Before we take the two components t
 
 Go ahead and take a break, the next step is to get those two components working together to create our application. :)
 
-## Putting the Search Bar and Image Gallery Together
+## Part Three: Putting the Search Bar and Image Gallery Together {#part-three}
 
-Currently, we have two components that are useful for a GIF Keyboard. Now we need to put those components together to get them functioning together!
+Currently, we have two components for a GIF Keyboard. Now we need to put those components together to get them functioning together!
 
 ### Application Level Component
 
-Recall the intended behavior for our application: GIFs should be searched as the user types. In a technical sense, this measns that requests should be made to the GIPHY address and the endpoint sure return images to be rendered on the application.
+Recall the intended behavior for our application: GIFs should be searched as the user types. In a technical sense, this means that requests should be made to the GIPHY address and the endpoint sure return images to be rendered on the application.
 
 Earlier, we have tested that our API Key and that we are able to make requests are working properly. We have imported them in each component. We only import them for testing purposes. Now, we will be importing them at the application level.
 
@@ -693,7 +673,6 @@ import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
 ```
 
 Remove those import statements in the `search-bar`, we won't be needing them in that component.
-
 
 ### Lifting the state up
 
@@ -720,9 +699,9 @@ When you run `npm run dev`, the search bar should no longer work. Don't worry, w
 
 ### Creating Our Own Event and Subscribing (`this.emit`)
 
-So right now, we have two components that will share a state from the parent component (`index`). We want to update the parent state from the child component. In context of this project, we want the `search-bar` component to update the `searchTerm` state from the parent.
+Right now, we have two components that will share a state from the parent component (`index`). We want to update the parent state from the child component. In context of this project, we want the `search-bar` component to update the `searchTerm` state from the parent.
 
-We do using custom events. Recall earlier that we used `on-input` to create the `search-bar` component, we can actually create our own `[custom event name] event` in the children that will emit that event. Then what we can do is have the parent subscribe, or "listen to" for that event.
+We do using custom events. Recall earlier that we used `on-input` to create the `search-bar` component, we can actually create our own `[custom event name]` event in the children that will emit that event. Then what we can do is have the parent subscribe, or "listen to" for that event.
 
 [Read more about the NodeJS event enitter](https://nodejs.org/api/events.html#events_class_eventemitter)
 
@@ -761,7 +740,7 @@ class {
 
 #### Subscribing to Events
 
-In the parent component, the syntax to subscrivbe to an emit in Marko is
+In the parent component, the syntax to subscribe to an emit in Marko is
 
 ```js
 class {
@@ -813,7 +792,7 @@ Note that `this.emit` second parameter, automatically gets passed in to the call
 
 Now that we know about emitting custom events, we can finally start writing code that will display gifs in the `image-gallery` component as we type.
 
-Inside the `image-gallery` component, raise the `getGifs` function to the `index`. Then raise the two import statements to the `index`. Lift all the `state` properties up to the index. Remove the first `<if>` tag in the html portion of the `image-gallery` and replace it with the following lines:
+Inside the `image-gallery` component, raise the `getGifs` function to the `index`. Remove the two import statements. Lift all the `state` properties up to the index. Remove the first `<if>` tag in the html portion of the `image-gallery` and replace it with the following lines:
 
 ```html
 <if(!input.searchTerm)>
@@ -828,11 +807,11 @@ Inside the `image-gallery` component, raise the `getGifs` function to the `index
 </else-if>
 ```
 
-[This is what your code base should look like now](https://github.com/bvi1994/marko-keyboard-example/tree/51ae20810b4c520345ef4d5c1050c2130b23485b/src). As an excerise, take a few minutes to figure out what the above submit does and how it fits to the code base.
+[This is what your code base should look like now](https://github.com/bvi1994/marko-keyboard-example/tree/51ae20810b4c520345ef4d5c1050c2130b23485b/src). As an excerise, take a few minutes to figure out what the above does and how it fits to the code base.
 
 We have successfully implemented live search for our keyboard, which is one of the main functions for this application! Give yourself a pat on the back!
 
-#### Implementing the Back and Forward Functionally
+#### Implementing the Back and Forward Scrolling Functionally
 
 Now that learned and have an example of how to subscribe and emit custom events, lets get those back and forward buttons working!
 
@@ -898,7 +877,7 @@ The main takeaway of this section is that we can set our own custom events. In o
 
 * In a parent component, add an attribute with `on-[emitted event name to listen to]` followed by function that should be invoked when the event is emitted.
 
-## Styling
+## Part Four: Styling (#part-four)
 
 In this last part, we will be styling our components using CSS and splitting our code. This part isn't as heavy in terms of Marko features but it is something you may see often in Marko projects. It is therefore worth looking over.
 
@@ -920,13 +899,13 @@ style {
 <all your tags go here>
 ```
 
-One thing to beware of is that when using the `style` block would apply the style ***globally***, not just within the component. Using a naming convention such as [BEM](https://css-tricks.com/bem-101/) elimininates the issue of global styles.
+***All the normal rules of CSS applies***. One thing to beware of is that when using the `style` block would apply the style ***globally***, not just within the component. Using a naming convention such as [BEM](https://css-tricks.com/bem-101/) elimininates the issue of global styles.
 
 A summary of BEM is described as below:
 
 * A **b**lock is the top level of a component.
 * An **e**lement are the children components of a component, usually donated with double underscores `(__)`.
-* A **m**odifier makes changes to the block from its initial behavior, usually denoted with double dashes `(--)`.
+* A **m**odifier makes changes to the block or element from its initial behavior, usually denoted with double dashes `(--)`.
 
 You can style the components as you like. The following CSS in the below dropdown is the CSS for the demo. Just don't forget to include the `style` block for each component!
 
