@@ -22,14 +22,14 @@ We will assume you have basic knowledge of HTML, CSS and JavaScript.
 
 The tutorial is divided into several sections:
 
-* [Setup for the Tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-* [Where to get help](#where-to-get-help) will show you **where to get help**
-* [Overview](#overview) will give you an **overview of what Marko is**
-* [Part 0](#part-zero)
-* [Part 1](#part-one)
-* [Part 2](#part-two)
-* [Part 3](#part-three)
-* [Part 4](#part-four)
+* [Setup for the Tutorial](#setup-for-the-tutorial) will give you a starting point to follow the tutorial.
+* [Where to get help](#where-to-get-help) will show you where to get help
+* [Overview](#overview) will give you an overview of what Marko is
+* [Part 0](#part-zero) will go through the set up for this tutorial
+* [Part 1](#part-one) introduces the `state` and events
+* [Part 2](#part-two) introduces custom, conditional tags and `input`
+* [Part 3](#part-three) introduces `emit` and custom events
+* [Part 4](#part-four) introduces styling with Marko
 
 ## Setup for the Tutorial {#setup-for-the-tutorial}
 
