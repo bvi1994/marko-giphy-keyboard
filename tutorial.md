@@ -1004,8 +1004,6 @@ Now we just need to apply the classes at the right places in the HTML portion of
 
 Congratulations! You have created an application does searches GIFs from GIPHY as the user types! We hope that you have a decent grasp on how Marko works and its features.
 
-Check out the final result here. [Final Result]()
-
 If you want extra practice of your new Marko skills, here are some ideas, in no particular order:
 
 * Implement search with other GIF services like [Tenor](https://tenor.com/) with this application
