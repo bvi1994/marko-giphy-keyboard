@@ -59,7 +59,7 @@ npm run dev
 
 Open `http://localhost:3000` in the browser, you see this following:
 
-[Insert the marko start image here](tutorial-images/welcome-to-marko.png)
+![Marko start image here](tutorial-images/welcome-to-marko.png)
 
 We recommend [using a Marko Syntax Highlighting Editor plugin](https://markojs.com/docs/editor-plugins/) for your editor.
 
