@@ -622,9 +622,9 @@ Now back in the the `image-gallery` component, add the following lines in the fo
 
 We will add the functionally of the buttons later, we just want to make sure that buttons render.
 
-In the `scroll-button` component, we have added an object called `input`. `input` in Marko is an object where the data is used for the component. The `input` object is similar to parameters in JavaScript functions. You can access the parameter function by using `input.[parameter-name]` within the component.
+In the `scroll-button` component, we have added an object called `input`. `input` in Marko is an object where the data is used for the component. The `input` object is similar to parameters in JavaScript functions. ***You can access the parameter function by using `input.[parameter-name]` within a child component.***
 
-To pass in a value by parameter to a component, simply add the following to the tag `parameter-name=value`.
+***To pass in a value by parameter to a component, simply add the following to the tag `parameter-name=value`.***
 
 In the example, we used passing in a `direction` as a parameter name for the `scroll-button` component. Within the `sctoll-button` component, we would access the value by using `input.direction`.
 
@@ -751,7 +751,7 @@ class {
 
 #### Subscribing to Events
 
-In the parent component, the syntax to subscrivbe to an emit in Marko is
+In the parent component, the syntax to subscribe to an emit in Marko is
 
 ```js
 class {
@@ -910,7 +910,7 @@ style {
 <all your tags go here>
 ```
 
-One thing to beware of is that when using the `style` block would apply the style ***globally***, not just within the component. Using a naming convention such as [BEM](https://css-tricks.com/bem-101/) elimininates the issue of global styles.
+***All the normal rules of CSS applies***. One thing to beware of is that when using the `style` block would apply the style ***globally***, not just within the component. Using a naming convention such as [BEM](https://css-tricks.com/bem-101/) elimininates the issue of global styles.
 
 A summary of BEM is described as below:
 
