@@ -7,7 +7,7 @@ This tutorial doesn't assume any existing Marko knowledge.
 
 In this tutorial, we'll show how to build a GIF Keyboard with Marko using the [GIPHY API](https://developers.giphy.com/docs/api#quick-start-guide).
 
-You can see what we'll be building here: **[Final Result]()**. Don't worry if this doesn't make sense! The goal of this tutorial is to help you understand Marko and its syntax.
+You can see what we'll be building here: **[Final Result](https://i.imgur.com/g3UBbXP.gif)**. Don't worry if this doesn't make sense! The goal of this tutorial is to help you understand Marko and its syntax.
 
 While this tutorial will go over most features of Marko, the code may not follow the best coding practices for Marko. The purpose of this tutorial are to give an overview of the features used in building Marko Applications and give you a deep understanding of Marko.
 
@@ -1003,6 +1003,8 @@ Now we just need to apply the classes at the right places in the HTML portion of
 ## Wrapping Up
 
 Congratulations! You have created an application does searches GIFs from GIPHY as the user types! We hope that you have a decent grasp on how Marko works and its features.
+
+[Here's the final result!](https://i.imgur.com/g3UBbXP.gif)
 
 If you want extra practice of your new Marko skills, here are some ideas, in no particular order:
 
