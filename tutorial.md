@@ -57,11 +57,11 @@ cd marko-giphy-keyboard
 npm run dev
 ```
 
-Open `http://localhost:3000` in the browser, you see this following:
+Open `http://localhost:3000` in the browser, you will see this following:
 
 ![Marko start image here](tutorial-images/welcome-to-marko.png)
 
-We recommend [using a Marko Syntax Highlighting Editor plugin](https://markojs.com/docs/editor-plugins/) for your editor.
+We recommend using a [Marko Syntax Highlighting Editor plugin](https://markojs.com/docs/editor-plugins/) for your editor.
 
 ### Getting the GIPHY API Key
 
@@ -145,11 +145,11 @@ style {
 
 Don't worry if you don't understand the code. We will explain the specific features of Marko in greater detail. What this code snippet shows is that Marko components are just written in HTML, CSS and JavaScript.
 
-***A component in Marko is basically a building block for a user interface. What Marko allows is the building parts of a UI which we can then use to build an entire interface. ***
+***A component in Marko is a building block for a user interface. What Marko allows the building of UI which we can then use to build an entire interface.***
 
-In this example, the `Counter` component compromises of three other components: the `click-count` callbacks div, and the two `button` that are built in with their corresponding `on-click` functions and styles. We can then call this component in another file by referring it as `<Counter />`
+In this example, the `Counter` component comprise of three other components: the `click-count` callbacks div, and the two `button` that are built in with their corresponding `on-click` functions and styles. We can then call this component in another file by referring it as `<Counter />`
 
-Notice that in the example, we have a `this.state` in this component.  This is known as the *state* of the component, which is essentially the properties of a component. We will talk more about state and how it is used.
+Notice that in the example, we have a `this.state` in this component.  This is known as the ***state*** of the component, which is essentially the properties of a component. We will talk more about state in Marko.
 
 #### How does Marko Work?
 
@@ -177,11 +177,11 @@ Suppose we have a component called `<list-of-numbers />` that lists the numbers 
 </div>
 ```
 
-What happens is that Marko renders the `<list-of-numbers />` **directly by outputting the HTML directly. ** Actually, Marko renders to the VDOM which then quickly renders the view on the browser.
+What happens is that Marko renders the `<list-of-numbers />` **directly by outputting the HTML directly.** Actually, Marko renders to the VDOM which then quickly renders the view on the browser.
 
 What is a VDOM? At a high level, a VDOM is just a representation of the actual DOM (the actual model that is render on the browser) that is more efficient to update than DOM manipulation. The implementation details on how Marko does it can be found [here](https://markojs.com/docs/why-is-marko-fast/).
 
-The `<list-of-numbers />` component only renders the build-in DOM components as the above code snippet above. We are allowed to compose components with other components we made. This for example, we can have a component called `<three-lists-of-numbers` /> by writing the following:
+The `<list-of-numbers />` component only renders the built-in DOM components as the above code snippet above. We are allowed to compose components with other components we made. This for example, we can have a component called `<three-lists-of-numbers` /> by writing the following:
 
 ```html
 <div.three-lists-of-numbers>
@@ -191,7 +191,7 @@ The `<list-of-numbers />` component only renders the build-in DOM components as 
 </div>
 ```
 
-The above component (`<three-list-of-numbers />`) will render the `<list-of-numbers />` three time every time we call `<three-list-of-numbers />`. Although the example is a bit contrived, the example shows that **we can encapsulate components inside other components. This allows us to build more complex UIs from simpler components. **
+The above component (`<three-list-of-numbers />`) will render the `<list-of-numbers />` three time every time we call `<three-list-of-numbers />`. Although the example is a bit contrived, the example shows that **we can encapsulate components inside other components.** This allows us to build more complex UIs from simpler components.
 
 ## Before Coding {#part-zero}
 
@@ -201,13 +201,13 @@ Before we start to write code for out GIF Keyboard, it is worth spending some ti
 
 Here's a rough mock of what our GIF Keyboard would look like:
 
-![The Worst Mockup for a GIF Keyboard by MS Paint](tutorial-images/mockup1.png)
+![GIF Keyboard MockUp without Labels or Boxes](tutorial-images/mockup1.png)
 
 The first thing to do is figure out what the main components are for the application. Once we identify the main components, we identify the sub-components of those main components. Identifying the main components and the corresponding subcomponents one level deep should be enough for this project.
 
 The image below displays the mock and the main components.
 
-![The Worst Mockup for a GIF Keyboard by MS Paint with Main Components](tutorial-images/mockup2.png)
+![GIF Keyboard Mockup with Main Components Boxed](tutorial-images/mockup2.png)
 
 In this image, we have two main components for our GIF keyboard. We will let the red main component to be `<search-bar />` and the blue main component to be `<image-gallery />`.
 
@@ -215,7 +215,7 @@ The `<search-bar />` Component will be take in user input and then passes the te
 
 Since we are allowed to encapsulate Marko components with other components, we can break the `<image-gallery />` into subcomponents. The subcomponents for `<image-gallery />` are boxed below in green and orange.
 
-![The Worst Mockup for a GIF Keyboard by MS Paint with subcomponents](tutorial-images/mockup3.png)
+![GIF Keyboard Mockup with Subcomponents Boxed](tutorial-images/mockup3.png)
 
 We will name the orange subcomponent as `<GIF />` subcomponent and the green subcomponents as `<scroll-button />`. Notice that while we identified three subcomponents, we only need to write two new subcomponents. We will go into further details once we start writing code for these components and subcomponents.
 
@@ -231,7 +231,7 @@ giphy-keyboard
 
 And here's the component hierarchy in picture:
 
-![The Worst Mockup for a GIF Keyboard by MS Paint with subcomponents](tutorial-images/mockup4.png)
+![GIF Keyboard Mockup with Components and Subcomponents labels](tutorial-images/mockup4.png)
 
 ### Before Starting Marko with this Project
 
@@ -879,7 +879,7 @@ The main takeaway of this section is that we can set our own custom events. In o
 
 ## Part Four: Styling (#part-four)
 
-In this last part, we will be styling our components using CSS and splitting our code. This part isn't as heavy in terms of Marko features, but it is something you may see often in Marko projects. It is therefore worth looking over.
+In this last part, we will be styling our components using CSS.
 
 ### Styling Components with CSS and BEM Naming Convention
 
@@ -904,7 +904,7 @@ style {
 A summary of BEM is described as below:
 
 * A **b**lock is the top level of a component.
-* An **e**lement are the children components of a component, usually donated with double underscores `(__)`.
+* An **e**lement are the children components of a component, usually denoted with double underscores `(__)`.
 * A **m**odifier makes changes to the block or element from its initial behavior, usually denoted with double dashes `(--)`.
 
 You can style the components as you like. The following CSS in the below dropdown is the CSS for the demo. Just don't forget to include the `style` block for each component!
@@ -1016,4 +1016,4 @@ Really, the skies the limit! Throughout this tutorial, we have gone over basic M
 
 If you have any questions about this tutorial or Marko in general, check out our [StackOverFlow page](https://stackoverflow.com/questions/tagged/marko). You can also check out our [Marko Glitter Chat](https://gitter.im/marko-js/marko) and post your questions.
 
-If you have any suggestions to improve this tutorial, that I got something wrong or just made a typo, feel free to submit a PR and I will take a look at it as soon as I can!
+If you have any suggestions to improve this tutorial, that I got something wrong or just made a typo, feel free to raise a PR and I will take a look at it as soon as I can!
