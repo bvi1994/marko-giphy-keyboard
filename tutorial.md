@@ -7,9 +7,11 @@ This tutorial doesn't assume any existing Marko knowledge.
 
 In this tutorial, we'll show how to build a GIF Keyboard with Marko using the [GIPHY API](https://developers.giphy.com/docs/api#quick-start-guide).
 
-You can see what we'll be building here: **[Final Result](https://i.imgur.com/g3UBbXP.gif)**. Don't worry if this doesn't make sense! The goal of this tutorial is to help you understand Marko and its syntax.
+You can see what we'll be building here: **[Final Result](https://i.imgur.com/g3UBbXP.gif)**. The goal of this tutorial is to help you understand Marko and its syntax. This tutorial will help you understand Marko by building the application as shown in the GIF. 
 
 While this tutorial will go over most features of Marko, the code may not follow the best coding practices for Marko. The purpose of this tutorial are to give an overview of the features used in building Marko Applications and give you a deep understanding of Marko.
+
+This tutorial has a few "checkpoints" that shows what your code should look like at a particular point.
 
 ### Prerequisites {#prerequisites}
 
@@ -143,7 +145,7 @@ style {
 </details>
 
 
-Don't worry if you don't understand the code. We will explain the specific features of Marko in greater detail. What this code snippet shows is that Marko components are just written in HTML, CSS and JavaScript.
+> Don't worry if you don't understand the code. We will explain the specific features of Marko in greater detail. What this code snippet shows is that Marko components are just written in HTML, CSS and JavaScript.
 
 ***A component in Marko is a building block for a user interface. What Marko allows the building of UI which we can then use to build an entire interface.***
 
@@ -203,7 +205,9 @@ Here's a rough mock of what our GIF Keyboard would look like:
 
 ![GIF Keyboard MockUp without Labels or Boxes](tutorial-images/mockup1.png)
 
-The first thing to do is figure out what the main components are for the application. Once we identify the main components, we identify the sub-components of those main components. Identifying the main components and the corresponding subcomponents one level deep should be enough for this project.
+> Figure out what the main components are for the application. Once we identify the main components, we identify the sub-components of those main components. 
+
+Identifying the main components and the corresponding subcomponents one level deep should be enough for this project.
 
 The image below displays the mock and the main components.
 
@@ -367,7 +371,9 @@ The `this.state` is one of the most important Marko features. `this.state` refer
 
 When the state object changes, the component will be updated. This would include the children, or the components that are encapsulated, to be re-rendered. Therefore, the *state object should only contain data that triggers re-renders*.
 
-Only properties that exists when `this.state` is first defined (usually in the `onCreate`) are watched and defined. Therefore, if you don't need to use that state when the component is created, set it to `null`.
+>Tip: 
+>
+> Only properties that exists when `this.state` is first defined (usually in the `onCreate`) are watched and defined. Therefore, if you don't need to use that state property when the component is created but may need to at a later time, set it to `null`.
 
 **In the HTML portion of Marko, `this` is not required to access the component state.** In other words, for HTML, you can access the component of the state using `state.[propertyName]`.
 
@@ -393,6 +399,7 @@ In the example code, we added an event handler to the `<input>` tag. To attach a
 
 ```html
 <!-- The HTML way to attach an event handler -- >
+
 <input oninput="functionSignature()" />
 ```
 
@@ -402,7 +409,9 @@ In Marko, we add an event handle like this:
 <input on-input("functionSignature") />
 ```
 
-We essentially add a `-` between `on` and the name and then pass in the callback signature in the class as a string. We could also pass in a callback directly into the event handle like so:
+We essentially add a `-` between `on` and the event name and then pass in the callback signature in the class as a string. 
+
+We could also pass in a callback directly into the event handle like so:
 
 
 ```html
@@ -437,7 +446,7 @@ In `index.marko`, put in the following lines:
 <search-bar />
 ```
 
-The behavior should be exactly the same as it was before. If the behavior as it was before, we have successfully encapsulated a component and made it a custom tag!
+The behavior should be exactly the same as it was before. If the behavior is the same, we have successfully encapsulated a component and made it a custom tag!
 
 ### What is happening with encapsulation?
 
@@ -455,7 +464,7 @@ Let’s review on what the `image-gallery` component hierarchy looks like:
   - scroll-button
 ```
 
-Looking at the mockup from earlier, `<Images>` would just be a bunch of images and we would have two `<scroll-button`> components, one going left and one going right that will allow users to scroll through the results. We will be building those subcomponents inside `<image-gallery>`.
+Looking at the mockup from earlier, `<image-gallery>` would just be a bunch of GIFs and we would have two `<scroll-button`> components, one going left and one going right that will allow users to scroll through the results. We will be building those subcomponents inside `<image-gallery>`.
 
 Create a folder called `image-gallery` inside the `components` folder. Then inside the `image-gallery` folder, create another `components` folder and a file called `image-gallery.marko`. Keep the inner `components` folder empty for now.
 
@@ -561,13 +570,17 @@ The `<if>` tag takes in an argument to see if anything should be rendered in bet
 
 ### The `for` tag
 
-We also have a `for` tag in the HTML portion of the component. The `for` tag is very similar to a for-loop in JavaScript. There are a few variants of the `for` tag in Marko, which are explained in the documentation below.
+We also have a `for` tag in the HTML portion of the component. The `for` tag in Marko is very similar to a for-loop in JavaScript. There are a few variants of the `for` tag, which are explained in the documentation below.
 
 [Read more about the `for` tag](https://markojs.com/docs/conditionals-and-lists/#lists)
 
 For the GIPHY Keyboard, since the GIPHY response is an array, we would use the `<for|item, ... |  of=array` variant of the `<for>` tag.
 
-***Be sure to always set a key when using the `for` tag***! In the GIPHY keyboard, we will be using the `image.id` (inside the `<a>` tag) from each image as the key.
+>Caution:
+>
+>***Be sure to always set a key when using the `for` tag***! 
+
+In the GIPHY keyboard, we will be using the `image.id` (inside the `<a>` tag) from each image as the key.
 
 ### Adding Scroll Buttons and `input`
 
@@ -661,7 +674,7 @@ Currently, we have two components for a GIF Keyboard. Now we need to put those c
 
 ### Application Level Component
 
-Recall the intended behavior for our application: GIFs should be searched as the user types. In a technical sense, this means that requests should be made to the GIPHY address and the endpoint sure return images to be rendered on the application.
+Recall the intended behavior for our application: GIFs should be searched as the user types. In a technical sense, this means that requests should be made to the GIPHY address and the endpoint responds with images to be rendered on the application.
 
 Earlier, we have tested that our API Key and that we are able to make requests are working properly. We have imported them in each component. We only import them for testing purposes. Now, we will be importing them at the application level.
 
@@ -672,11 +685,11 @@ import fetch from 'node-fetch'
 import {GIPHYAPIKEY} from './../../../APIKEY.constants.js'
 ```
 
-Remove those import statements in the `search-bar`, we won't be needing them in that component.
+Remove those import statements in the `<search-bar>`, we won't be needing them in that component.
 
 ### Lifting the state up
 
-Since we want to refresh every time a user types in a query (the search term), we want to put the `searchTerm` state at the application level. We move the following lines of code form `search-bar` component to the `index`:
+Since we want to refresh every time a user types in a query (the search term), we want to put the `searchTerm` state at the application level. We move the following lines of code form `<search-bar>` component to the `index`:
 
 ```js
 class {
@@ -693,15 +706,17 @@ class {
 }
 ```
 
-In the `search-bar` component, change the `state` to `input` as we will feed the `input` into the `search-bar` component.
+In the `<search-bar>` component, change the `state` to `input` as we will feed the `input` into the `<search-bar>` component.
 
-When you run `npm run dev`, the search bar should no longer work. Don't worry, we will fix it. [This is what your code should look like so far](https://github.com/bvi1994/marko-keyboard-example/commit/74091b961770b2b79c742159c67d001b22df7b1a). Right now, we are just trying to make sure that the search gets updated for both components. As you may guess, we will use this `searchTerm` state with those two components. Hence, why the `searchTerm` would be in the parent component.
+When you run `npm run dev`, the search bar should no longer work. Don't worry, we will fix it. [This is what your code should look like so far](https://github.com/bvi1994/marko-keyboard-example/commit/74091b961770b2b79c742159c67d001b22df7b1a). 
+
+Right now, we are just trying to make sure that the search gets updated for both components. As you may guess, we will use this `searchTerm` state with those two components. Hence, why the `searchTerm` would be in the parent component.
 
 ### Creating Our Own Event and Subscribing (`this.emit`)
 
-Right now, we have two components that will share a state from the parent component (`index`). We want to update the parent state from the child component. In context of this project, we want the `search-bar` component to update the `searchTerm` state from the parent.
+Right now, we have two components that will share a state from the parent component (`index`). We want to update the parent state from the child component. In context of this project, we want the `<search-bar>` component to update the `searchTerm` state from the parent.
 
-We do use custom events. Recall earlier that we used `on-input` to create the `search-bar` component, we can actually create our own `[custom event name]` event in the children that will emit that event. Then what we can do is have the parent subscribe, or "listen to" for that event.
+We use custom events. Recall earlier that we used `on-input` to create the `<search-bar>` component, we can actually create our own `[custom event name]` event in the children that will emit that event. Then what we can do is have the parent subscribe, or "listen to" for that event with `on-[custom event name]`.
 
 [Read more about the NodeJS event enitter](https://nodejs.org/api/events.html#events_class_eventemitter)
 
@@ -790,9 +805,9 @@ Note that `this.emit` second parameter, automatically gets passed in to the call
 
 #### Getting Live Search Working
 
-Now that we know about emitting custom events, we can finally start writing code that will display gifs in the `image-gallery` component as we type.
+Now that we know about emitting custom events, we can finally start writing code that will display gifs in the `<image-gallery>` component as we type.
 
-Inside the `image-gallery` component, raise the `getGifs` function to the `index`. Remove the two import statements. Lift all the `state` properties up to the index. Remove the first `<if>` tag in the html portion of the `image-gallery` and replace it with the following lines:
+Inside the `<image-gallery>` component, raise the `getGifs` function to the `index`. Remove the two import statements. Lift all the `state` properties up to the index. Remove the first `<if>` tag in the html portion of the `<image-gallery>` and replace it with the following lines:
 
 ```html
 <if(!input.searchTerm)>
@@ -815,7 +830,7 @@ We have successfully implemented live search for our keyboard, which is one of t
 
 Now that learned and have an example of how to subscribe and emit custom events, let’s get those back and forward buttons working!
 
-In the `scroll-button` component, add the following class callback (Remember, we will be emitting events from the children):
+In the `<scroll-button>` component, add the following class callback (Remember, we will be emitting events from the children):
 
 ```js
 class {
@@ -830,7 +845,7 @@ class {
 }
 ```
 
-In the `button` tag, attach an `on-click` event, with the second argument being the direction of the button like this:
+In the `<button>` tag, attach an `on-click` event, with the second argument being the direction of the button like this:
 
 ```html
 <button
@@ -840,7 +855,7 @@ In the `button` tag, attach an `on-click` event, with the second argument being 
 </button>
 ```
 
-Going up one level on the component hierarchy, we will subscribe to the `paginate` event for both `scroll-button`s in the `image-gallery` component. As an exercise, try implementing the following without looking at the code base: When the `paginate` event gets emitted from `scroll-button`, the `displayMoreGifs` should be called with the correct behavior for each button.
+Going up one level on the component hierarchy, we will subscribe to the `paginate` event for both `<scroll-button>`s in the `<image-gallery>` component. As an exercise, try implementing the following without looking at the code base: When the `paginate` event gets emitted from `<scroll-button>`, the `displayMoreGifs` should be called with the correct behavior for each button.
 
 Finally, in the `index`, add the following signature to the class:
 
@@ -853,7 +868,7 @@ updateIndex(newIndex={currentIndex: 0}){
 
 Change the last line in the `updateSearchTerm` signature from `this.getGifs()` to `this.updateIndex()`.
 
-In the HTML portion, remove the `<p>` tag as we no longer need to track the `searchTerm` state in the DOM. Update the `image-gallery` component to the following:
+In the HTML portion, remove the `<p>` tag as we no longer need to track the `searchTerm` state in the DOM. Update the `<image-gallery>` component to the following:
 
 ```html
 <image-gallery
