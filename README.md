@@ -1,4 +1,4 @@
-# Welcome to a new Marko example
+# Welcome to the Marko GIPHY Keyboard Example
 
 Thanks for checking out this repo. This repo contains the completed source code for the GIPHY Live Search in Marko as well as the Marko down for the tutorial that teaches someone how to make the GIPHY Live Search App.
 
